@@ -10,8 +10,8 @@ const RouterPages = () => {
 	return (
 		<Switch>
 			<Route exact path="/" component={PageSignIn} />
-			<Route path="/auth" component={RouterAuth} />
-			<Route path="/user" component={RouterUser} />
+			<Route component={RouterAuth} />
+			<Route component={RouterUser} />
 		</Switch>
 	)
 }

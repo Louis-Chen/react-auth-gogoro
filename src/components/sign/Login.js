@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Segment, Header, Divider } from 'semantic-ui-react'
+import { Button, Form, Header, Divider } from 'semantic-ui-react'
 import { Form as Formik, Field, withFormik, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 
@@ -7,7 +7,7 @@ import { Field as Input } from '../field'
 
 const AuthLogin = props => {
 	return (
-		<Form as={Segment}>
+		<Form>
 			<Header as="h1" content="登入表單" />
 			<Divider />
 			<Formik>

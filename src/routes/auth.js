@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
 
-import PageAuthRegister from 'components/auth/Register'
+import PageAuthRegister from 'router/auth/Register'
 import PageAuthResetPassword from 'components/auth/ResetPassword'
 
 const AdminPages = () => {

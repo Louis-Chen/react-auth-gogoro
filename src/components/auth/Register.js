@@ -5,8 +5,8 @@ import { compose, withHandlers } from 'recompose'
 
 import { Field as Input } from '../field'
 import * as yup from 'yup'
-import { withFirestore, withFirebase } from 'react-redux-firebase'
-import { toast } from 'react-toastify';
+import { withFirebase } from 'react-redux-firebase'
+import { toast } from 'react-toastify'
 
 const AuthRegister = props => {
 	return (
@@ -29,7 +29,6 @@ const AuthRegister = props => {
 					<Field name="confirm_password" type="password" placeholder="密碼" component={Input.Text} />
 					<ErrorMessage name="confirm_password" />
 				</Form.Field>
-
 				<Button type="submit" fluid content="登入" />
 			</Formik>
 		</Form>

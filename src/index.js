@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import { store, history, reduxfirebaseProps, persistor } from 'config/configureStore'
 
-import App from './App'
+import App from './app'
 
 import * as serviceWorker from './serviceWorker'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
@@ -30,7 +30,7 @@ render(App)
 
 if (module.hot) {
 	module.hot.accept('./app', () => {
-		const NextApp = require('./App').default
+		const NextApp = require('./app').default
 		render(NextApp)
 	})
 }

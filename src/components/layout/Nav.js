@@ -15,7 +15,7 @@ const MenuAuth = props => {
 		<React.Fragment>
 			<Dropdown item text={email}>
 				<Dropdown.Menu>
-					<Dropdown.Item>會員資料</Dropdown.Item>
+					<Dropdown.Item as={Link} to='/user/profile'>會員資料</Dropdown.Item>
 					<Dropdown.Item onClick={userLoginout}>登出</Dropdown.Item>
 				</Dropdown.Menu>
 			</Dropdown>

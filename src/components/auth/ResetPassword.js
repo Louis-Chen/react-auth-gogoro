@@ -1,58 +1,70 @@
 import React from 'react'
 import { Form, Button, Header, Divider } from 'semantic-ui-react'
-import { Form as Formik, Field, withFormik } from 'formik'
-import { Field as Input } from 'components/field'
-import * as yup from 'yup'
+import { Form as Formik, withFormik, Field, ErrorMessage } from 'formik'
+import { compose, withHandlers } from 'recompose'
 
-const VerifyResetPassword = props => {
+import { Field as Input } from '../field'
+import * as yup from 'yup'
+import { withFirebase } from 'react-redux-firebase'
+import { toast } from 'react-toastify'
+
+const ResetPassword = props => {
 	return (
 		<Form>
-			<Header content="忘記密碼" />
+			<Header as="h1" content="忘記密碼" />
 			<Divider />
 			<Formik>
-				<Form.Group widths="equal">
-					<Form.Field>
-						<label>請輸入新密碼</label>
-						<Field name="password" type="password" component={Input.Text} />
-					</Form.Field>
-				</Form.Group>
-				<Form.Group widths="equal">
-					<Form.Field>
-						<label>請重新輸入新密碼</label>
-						<Field name="confirm_password" type="password" component={Input.Text} />{' '}
-					</Form.Field>
-				</Form.Group>
-				<Button fluid type="submit" content="確認變更" />
+				<Form.Field>
+					<label>輸入信箱：</label>
+					<Field name="email" type="email" placeholder="帳號(信箱)" component={Input.Text} />
+					<ErrorMessage name="email" />
+				</Form.Field>
+				<Button type="submit" fluid content="登入" />
 			</Formik>
 		</Form>
 	)
 }
 
-const enhancer = withFormik({
-	mapPropsToValues: () => ({ account: '', password: '', confirm_password: '' }),
+const enhancer = compose(
+	withFirebase,
+	withHandlers({
+		resetPassword: ({ firebase }) => values => {
+			firebase.resetPassword(values.email).then(
+				res => {
+					toast.success(`送出驗證信`, {
+						position: toast.POSITION.TOP_CENTER
+					})
+				},
+				err => {
+					toast.error(`送出驗證信失敗，${err}`, {
+						position: toast.POSITION.TOP_CENTER
+					})
+				}
+			)
+		}
+	}),
+	withFormik({
+		mapPropsToValues: () => ({ email: '' }),
 
-	// Custom sync validation
+		// Custom sync validation
 
-	validationSchema: () =>
-		yup.object().shape({
-			password: yup
-				.string()
-				.required('必填')
-				.min(6, '不可小於6個字'),
-			confirm_password: yup
-				.string()
-				.required('必填')
-				.min(6, '不可小於6個字')
-				.oneOf([yup.ref('password')], '密碼不相同')
-		}),
-	handleSubmit: (values, { setSubmitting }) => {
-		setTimeout(() => {
-			alert(JSON.stringify(values, null, 2))
-			setSubmitting(false)
-		}, 1000)
-	},
+		validationSchema: () =>
+			yup.object().shape({
+				email: yup
+					.string()
+					.email('不符合信箱格式')
+					.required('必填')
+			}),
+		handleSubmit: (values, { setSubmitting, props: { resetPassword } }) => {
+			setTimeout(() => {
+				// alert(JSON.stringify(values, null, 2))
+				resetPassword(values)
+				setSubmitting(false)
+			}, 1000)
+		},
 
-	displayName: 'RestPassword'
-})
+		displayName: 'AuthRetsetPassword'
+	})
+)
 
-export default enhancer(VerifyResetPassword)
+export default enhancer(ResetPassword)

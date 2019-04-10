@@ -8,7 +8,7 @@ import { withFirebase, isEmpty } from 'react-redux-firebase'
 
 const MenuAuth = props => {
 	const {
-		profile: { email },
+		auth: { email },
 		userLoginout
 	} = props
 	return (
@@ -26,7 +26,7 @@ const MenuDefault = props => {
 	return (
 		<React.Fragment>
 			<Menu.Item>
-				<Button primary as={Link} to="auth/register" content="註冊" size="big">
+				<Button primary as={Link} to="/auth/register" content="註冊" size="big">
 					註冊
 				</Button>
 			</Menu.Item>
@@ -38,8 +38,8 @@ const MenuDefault = props => {
 	)
 }
 const Nav = props => {
-	const { profile, userLoginout } = props
-	const isAuthed = isEmpty(profile) ? <MenuDefault /> : <MenuAuth profile={profile} userLoginout={userLoginout} />
+	const { auth, userLoginout } = props
+	const isAuthed = isEmpty(auth) ? <MenuDefault /> : <MenuAuth auth={auth} userLoginout={userLoginout} />
 
 	return (
 		<Menu size="huge">
@@ -49,7 +49,7 @@ const Nav = props => {
 }
 
 const mapStateToProps = state => ({
-	profile: state.firebase.profile
+	auth: state.firebase.auth
 })
 
 const enhancer = compose(

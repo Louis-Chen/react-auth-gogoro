@@ -7,7 +7,6 @@ import { compose, withHandlers } from 'recompose'
 import { Field as Input } from '../field'
 import * as yup from 'yup'
 import { withFirebase, withFirestore } from 'react-redux-firebase'
-import PhoneVerify from './PhoneVerify'
 
 const UserProfile = props => {
 	const { isVerify, phoneNumberVerify, firebase } = props
@@ -28,10 +27,6 @@ const UserProfile = props => {
 					<Field name="email" type="email" placeholder="帳號(信箱)" component={Input.Text} />
 					<ErrorMessage name="email" />
 				</Form.Field>
-				<Form.Field>
-					<label>手機驗證：</label>
-					<PhoneVerify placeholder="輸入手機號碼" />
-				</Form.Field>
 
 				<Button type="submit" fluid content="修改" />
 			</Formik>
@@ -46,32 +41,6 @@ UserProfile.defaultValues = {
 const enhancer = compose(
 	withFirebase,
 	withFirestore,
-	withHandlers({
-		phoneNumberVerify: ({ firebase }) => values => {
-			const phoneNumber = '+11234567899' // for US number (123) 456-7899
-			const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
-				size: 'invisible'
-			})
-			firebase.auth().useDeviceLanguage()
-
-			recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container')
-
-			const appVerifier = recaptchaVerifier
-
-			firebase
-				.signInWithPhoneNumber(phoneNumber, appVerifier)
-				.then(confirmationResult => {
-					// SMS sent. Prompt user to type the code from the message, then sign the
-					// user in with confirmationResult.confirm(code).
-					const verificationCode = <Prompt message="輸入碼" />
-				})
-				.catch(error => {
-					// Error; SMS not sent
-					// Handle Errors Here
-					return Promise.reject(error)
-				})
-		}
-	}),
 	withFormik({
 		mapPropsToValues: props => {
 			return { ...props.initialValue }

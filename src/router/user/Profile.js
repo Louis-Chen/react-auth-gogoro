@@ -5,9 +5,10 @@ import { compose, withHandlers } from 'recompose'
 import { Container, Segment } from 'semantic-ui-react'
 
 import { withFirebase, withFirestore } from 'react-redux-firebase'
-import UserProfile from 'components/user/Profile'
+
 import { toast } from 'react-toastify'
 
+import UserProfile from 'components/user/Profile'
 const PageUserProfile = props => {
 	const { displayName, email, phoneNumber, emailVerified } = props.auth
 	useEffect(() => {

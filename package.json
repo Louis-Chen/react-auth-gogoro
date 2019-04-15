@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-google-maps/api": "^1.2.3-alpha.4",
+    "axios": "^0.18.0",
     "connected-react-router": "^6.3.2",
     "firebase": "^5.9.3",
     "formik": "^1.5.2",
+    "google-map-react": "^1.1.4",
     "query-string": "^6.4.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

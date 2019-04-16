@@ -25,11 +25,11 @@ import reducer from './reducers'
  */
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyAindpe5d5Rv28L5uy5l3-LoGfTvp9qJ0Y',
+	apiKey: 'AIzaSyAkdvJpmaNSRVqu35dqpgqcEHVso3OilEc',
 	authDomain: 'auth-e36aa.firebaseapp.com',
 	databaseURL: 'https://auth-e36aa.firebaseio.com',
 	projectId: 'auth-e36aa',
-	storageBucket: '',
+	storageBucket: 'auth-e36aa.appspot.com',
 	messagingSenderId: '289566316538'
 }
 

@@ -9,6 +9,7 @@ import { withFirebase, withFirestore } from 'react-redux-firebase'
 import { toast } from 'react-toastify'
 
 import UserProfile from 'components/user/Profile'
+import UserPhone from '../../components/user/Phone';
 const PageUserProfile = props => {
 	const { displayName, email, phoneNumber, emailVerified } = props.auth
 	useEffect(() => {
@@ -27,6 +28,7 @@ const PageUserProfile = props => {
 			<Segment>
 				<UserProfile initialValue={initialValue} isVerify={emailVerified} />
 			</Segment>
+			<UserPhone/>
 		</Container>
 	)
 }

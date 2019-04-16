@@ -5,12 +5,12 @@ const FETCH_GOGORO_API_SUCCESS = 'FETCH_GOGORO_API_SUCCESS'
 const fetchGogoroAPI = payload => {
 	return dispatch => {
 		return axios
-			.get('https://wapi.gogoro.com/tw/api/vm/list')
+			.get('https://webapi.gogoro.com/api/vm/list')
 			.then(response => {
 				// handle success
 				const preparation = []
 				// 資料格式預處理
-				response.data.data.map((d, i) => {
+				response.data.map((d, i) => {
 					const LocName = JSON.parse(d.LocName)
 					const Address = JSON.parse(d.Address)
 					const District = JSON.parse(d.District)
@@ -29,7 +29,6 @@ const fetchGogoroAPI = payload => {
 						AvailableTimeByte: d.AvailableTimeByte
 					})
 				})
-
 				return dispatch(fetchGogoroAPISuccess(preparation))
 			})
 			.catch(function(error) {

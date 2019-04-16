@@ -22,7 +22,6 @@ const StationList = props => {
 
 	useEffect(() => {
 		if (isEmpty(gogoro)) {
-			console.log(gogoro)
 			return fetchGogoroAPI()
 		}
 		if (city) {
@@ -38,7 +37,6 @@ const StationList = props => {
 					})
 				}
 			})
-			console.log(options)
 			return setTownOption(options)
 		}
 		return setStation(gogoro)

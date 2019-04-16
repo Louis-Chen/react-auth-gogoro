@@ -44,7 +44,7 @@ export const firedatabase = firebase.database()
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: []
+	whitelist: ['gogoro']
 }
 
 const persistedReducer = root => persistReducer(persistConfig, root)
@@ -73,7 +73,6 @@ if (process.env.NODE_ENV === 'development') {
 			store.replaceReducer(reducer(history))
 		})
 	}
-
 } else if (process.env.NODE_ENV === 'production') {
 	console.log(process.env.NODE_ENV)
 }

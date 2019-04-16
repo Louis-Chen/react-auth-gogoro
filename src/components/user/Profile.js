@@ -1,15 +1,14 @@
 import React from 'react'
-import { Prompt } from 'react-router-dom'
 import { Form, Button, Header, Divider, Label } from 'semantic-ui-react'
 import { Form as Formik, withFormik, Field, ErrorMessage } from 'formik'
-import { compose, withHandlers } from 'recompose'
+import { compose } from 'recompose'
 
 import { Field as Input } from '../field'
 import * as yup from 'yup'
 import { withFirebase, withFirestore } from 'react-redux-firebase'
 
 const UserProfile = props => {
-	const { isVerify, phoneNumberVerify, firebase } = props
+	const { isVerify } = props
 	return (
 		<Form>
 			<Header as="h1" content="使用者資料" />

@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import firebase from 'firebase'
+import React, { Component, useState } from 'react'
+import { compose } from 'recompose'
+import { Form, Input, Button } from 'semantic-ui-react'
+import { withFirebase } from 'react-redux-firebase'
 
 class UserPhone extends Component {
 	constructor(props) {
@@ -15,12 +17,13 @@ class UserPhone extends Component {
 		}
 	}
 	handleSubmit(e) {
+		const { firebase } = this.props
 		e.preventDefault()
+		//	const phone ='+12345678000'
 		const { phoneNumber } = this.state
 		if (this.state.captchaRespone.length > 0) {
 			let appVerifier = window.recaptchaVerifier
 			firebase
-				.auth()
 				.signInWithPhoneNumber(phoneNumber, appVerifier)
 				.then(confirmResult => {
 					// This means that the SMS has been sent to the user
@@ -65,18 +68,9 @@ class UserPhone extends Component {
 			})
 	}
 	componentDidMount() {
-		if (!firebase.apps.length) {
-			var config = {
-        apiKey: "AIzaSyAkdvJpmaNSRVqu35dqpgqcEHVso3OilEc",
-        authDomain: "auth-e36aa.firebaseapp.com",
-        databaseURL: "https://auth-e36aa.firebaseio.com",
-        projectId: "auth-e36aa",
-        storageBucket: "auth-e36aa.appspot.com",
-        messagingSenderId: "289566316538"
-			}
-			firebase.initializeApp(config)
-		}
-		window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(this.recaptcha, {
+		const { firebase } = this.props
+
+		window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
 			size: 'normal',
 			callback: response => {
 				// reCAPTCHA solved, allow signInWithPhoneNumber.
@@ -97,56 +91,41 @@ class UserPhone extends Component {
 	}
 	render() {
 		return (
-			<div className="container">
+			<Form>
 				{!this.state.showVerification && (
-					<div>
-						<h2 style={{ textAlign: 'center' }}>Firebase Phone Auth</h2>
-						<div ref={ref => (this.recaptcha = ref)} />
-						<div className="input-group mb-3">
-							<input
-								name="phoneNumber"
-								autoFocus={true}
-								onChange={this.handleChange}
-								type="text"
-								value={this.state.phoneNumber}
-								autoComplete="off"
-								className="form-control"
-								onSubmit={this.handleSubmit}
-								placeholder="Phone Number"
-							/>
-							<div className="input-group-append">
-								<button className="btn btn-success" onClick={this.handleSubmit} type="submit">
-									Go
-								</button>
-							</div>
-						</div>
-					</div>
+					<Form.Field>
+						<label>手機驗證</label>
+						<Input
+							name="phoneNumber"
+							autoFocus={true}
+							onChange={this.handleChange}
+							type="text"
+							value={this.state.phoneNumber}
+							autoComplete="off"
+						/>
+						<Button onClick={this.handleSubmit} type="submit" content="送出" />
+						<div id="sign-in-button" />
+					</Form.Field>
 				)}
 				{this.state.showVerification && (
-					<div>
-						<h2 style={{ textAlign: 'center' }}>Enter Verification Code</h2>
-						<div className="input-group mb-3">
-							<input
-								name="verificationCode"
-								onChange={this.handleChange}
-								type="text"
-								value={this.state.verificationCode}
-								autoComplete="off"
-								autoFocus={true}
-								className="form-control"
-								placeholder="Verification Number"
-							/>
-							<div className="input-group-append">
-								<button className="btn btn-primary" onClick={this.handleVerification} type="submit">
-									Verify
-								</button>
-							</div>
-						</div>
-					</div>
+					<Form.Field>
+						<label>手機驗證</label>
+						<div id="sign-in-button" />
+						<Input
+							name="verificationCode"
+							onChange={this.handleChange}
+							type="text"
+							value={this.state.verificationCode}
+							autoComplete="off"
+							autoFocus={true}
+						/>
+						<Button onClick={this.handleVerification} type="submit" content="驗證" />
+					</Form.Field>
 				)}
-			</div>
+			</Form>
 		)
 	}
 }
 
-export default UserPhone
+const enhancer = compose(withFirebase)
+export default enhancer(UserPhone)

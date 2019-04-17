@@ -11,7 +11,6 @@ import GogoroStationMap from 'components/gogoro/Map'
 
 const PageGogoro = props => {
 	const { gogoro, fetchGogoroAPI } = props
-
 	return (
 		<Grid fluid>
 			<Row>

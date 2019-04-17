@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { map, isEmpty } from 'lodash'
-import { compose } from 'recompose'
-import { connect } from 'react-redux'
-
 import { Item, Input, Select, Form, Segment } from 'semantic-ui-react'
-import { fetchGogoroAPI } from '../../store/fetchGogoroAPI'
 import { cities, towns } from './data'
 
 const cityOptions = map(cities, city => ({

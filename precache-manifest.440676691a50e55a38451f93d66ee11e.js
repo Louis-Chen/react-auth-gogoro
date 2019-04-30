@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/react-auth-gogoro/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "42072d196d656f20251d",
-    "url": "/react-auth-gogoro/static/js/main.c0dae1c2.chunk.js"
+    "revision": "4761398f8ef3e31e6cbe",
+    "url": "/react-auth-gogoro/static/js/main.26cdc92f.chunk.js"
   },
   {
     "revision": "a1a749e89f578a49306ec2b055c073da",
@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/react-auth-gogoro/static/css/2.3c587d02.chunk.css"
   },
   {
-    "revision": "15a10c63414baa20a4cb2223fdd9c96e",
+    "revision": "f7924d3a909629bfc2b3998d8b311a8d",
     "url": "/react-auth-gogoro/index.html"
   }
 ];

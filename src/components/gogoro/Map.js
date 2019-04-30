@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { isEmpty } from 'lodash'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { GoogleMap, Marker, withGoogleMap, withScriptjs, InfoWindow } from 'react-google-maps'
 
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer'
@@ -15,13 +15,14 @@ const GogoroStationMap = props => {
 	const [isOpen, setOpen] = useState(false)
 	const [isInfo, setInfoID] = useState('')
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (isEmpty(gogoro)) {
 			console.log(gogoro)
 			return fetchGogoroAPI()
 		}
 		return setStation(gogoro)
 	}, [gogoro])
+
 	const toggleInfo = (open, id) => {
 		setInfoID(id)
 		setOpen(open)
@@ -46,14 +47,18 @@ const GogoroStationMap = props => {
 				</Marker>
 			)
 		})
-	return (
-		<React.Fragment>
-			<pre>{JSON.stringify(station, null, 2)}</pre>
-			<GoogleMap defaultZoom={7} defaultCenter={{ lat: 23.5, lng: 120 }}>
-				<MarkerClusterer>{StationMark}</MarkerClusterer>
-			</GoogleMap>
-		</React.Fragment>
-	)
+	if (isEmpty(gogoro)) {
+		return <div>沒東西</div>
+	} else {
+		return (
+			<React.Fragment>
+				<pre>{JSON.stringify(station, null, 2)}</pre>
+				<GoogleMap defaultZoom={7} defaultCenter={{ lat: 23.5, lng: 120 }}>
+					<MarkerClusterer>{StationMark}</MarkerClusterer>
+				</GoogleMap>
+			</React.Fragment>
+		)
+	}
 }
 
 const mapStateToProps = state => ({

@@ -13,6 +13,11 @@ const MenuAuth = props => {
 	} = props
 	return (
 		<React.Fragment>
+			<Menu.Item>
+				<Button primary as={Link} to="/gogoro" content="註冊" size="big">
+					Gogoro 充電站地圖
+				</Button>
+			</Menu.Item>
 			<Dropdown item text={email}>
 				<Dropdown.Menu>
 					<Dropdown.Item as={Link} to='/user/profile'>會員資料</Dropdown.Item>
@@ -43,6 +48,7 @@ const Nav = props => {
 
 	return (
 		<Menu size="huge">
+
 			<Menu.Menu position="right">{isAuthed}</Menu.Menu>
 		</Menu>
 	)

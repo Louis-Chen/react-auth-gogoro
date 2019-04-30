@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/react-auth-gogoro/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "4761398f8ef3e31e6cbe",
-    "url": "/react-auth-gogoro/static/js/main.26cdc92f.chunk.js"
+    "revision": "099e67117117c2eae71a",
+    "url": "/react-auth-gogoro/static/js/main.e25efa2f.chunk.js"
   },
   {
     "revision": "a1a749e89f578a49306ec2b055c073da",
@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "/react-auth-gogoro/static/media/outline-icons.ef60a4f6.woff"
   },
   {
-    "revision": "9c74e172f87984c48ddf5c8108cabe67",
-    "url": "/react-auth-gogoro/static/media/flags.9c74e172.png"
-  },
-  {
     "revision": "701ae6abd4719e9c2ada3535a497b341",
     "url": "/react-auth-gogoro/static/media/outline-icons.701ae6ab.eot"
+  },
+  {
+    "revision": "9c74e172f87984c48ddf5c8108cabe67",
+    "url": "/react-auth-gogoro/static/media/flags.9c74e172.png"
   },
   {
     "revision": "ad97afd3337e8cda302d10ff5a4026b8",
@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/react-auth-gogoro/static/css/2.3c587d02.chunk.css"
   },
   {
-    "revision": "f7924d3a909629bfc2b3998d8b311a8d",
+    "revision": "d94908d21d61b5fc141ac9aa3b7fe5a5",
     "url": "/react-auth-gogoro/index.html"
   }
 ];

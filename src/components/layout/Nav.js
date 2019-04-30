@@ -14,8 +14,8 @@ const MenuAuth = props => {
 	return (
 		<React.Fragment>
 			<Menu.Item>
-				<Button primary as={Link} to="/gogoro" content="註冊" size="big">
-					Gogoro 充電站地圖
+				<Button primary as={Link} to="/gogoro" content="Gogoro 充電站地圖" size="big">
+
 				</Button>
 			</Menu.Item>
 			<Dropdown item text={email}>

@@ -1,53 +1,41 @@
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState } from 'react'
 import { isEmpty } from 'lodash'
-import { connect } from 'react-redux'
 import { GoogleMap, Marker, withGoogleMap, withScriptjs, InfoWindow } from 'react-google-maps'
 
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer'
 
 import { compose, withProps } from 'recompose'
 import { Header, Divider, List } from 'semantic-ui-react'
-import { fetchGogoroAPI } from '../../store/fetchGogoroAPI';
 
 const GogoroStationMap = props => {
-	const { gogoro, fetchGogoroAPI } = props
-	const [station, setStation] = useState([])
+	const { station } = props
 	const [isOpen, setOpen] = useState(false)
 	const [isInfo, setInfoID] = useState('')
 
-	useLayoutEffect(() => {
-		if (isEmpty(gogoro)) {
-			console.log(gogoro)
-			return fetchGogoroAPI()
-		}
-		return setStation(gogoro)
-	}, [gogoro])
 
 	const toggleInfo = (open, id) => {
 		setInfoID(id)
 		setOpen(open)
 	}
-	const StationMark =
-		!isEmpty(station) &&
-		station.map((s, i) => {
-			const StationInfo = isOpen && isInfo === i && (
-				<InfoWindow position={{ lat: s.Latitude, lng: s.Longitude }}>
-					<React.Fragment>
-						<Header content={s.LocName.List[1].Value} />
-						<Divider />
-						<List>
-							<List.Item>{s.Address.List[1].Value}</List.Item>
-						</List>
-					</React.Fragment>
-				</InfoWindow>
-			)
-			return (
-				<Marker key={i} position={{ lat: s.Latitude, lng: s.Longitude }} onClick={() => toggleInfo(true, i)}>
-					{StationInfo}
-				</Marker>
-			)
-		})
-	if (isEmpty(gogoro)) {
+	const StationMark = station.map((s, i) => {
+		const StationInfo = isOpen && isInfo === i && (
+			<InfoWindow position={{ lat: s.Latitude, lng: s.Longitude }}>
+				<React.Fragment>
+					<Header content={s.LocName.List[1].Value} />
+					<Divider />
+					<List>
+						<List.Item>{s.Address.List[1].Value}</List.Item>
+					</List>
+				</React.Fragment>
+			</InfoWindow>
+		)
+		return (
+			<Marker key={i} position={{ lat: s.Latitude, lng: s.Longitude }} onClick={() => toggleInfo(true, i)}>
+				{StationInfo}
+			</Marker>
+		)
+	})
+	if (isEmpty(station)) {
 		return <div>沒東西</div>
 	} else {
 		return (
@@ -61,18 +49,12 @@ const GogoroStationMap = props => {
 	}
 }
 
-const mapStateToProps = state => ({
-	gogoro: state.gogoro
-})
-const mapDispatchToProps = dispatch => ({
-	fetchGogoroAPI: () => dispatch(fetchGogoroAPI())
-})
+GogoroStationMap.defaultProps = {
+	station: []
+}
 
 const enhancer = compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
+
 	withProps({
 		/**
 		 * Note: create and replace your own key in the Google console.

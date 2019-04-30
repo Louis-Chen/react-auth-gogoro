@@ -53,7 +53,7 @@ const persistedReducer = root => persistReducer(persistConfig, root)
  * config
  */
 
-export const history = createBrowserHistory()
+export const history = createBrowserHistory({ basename: process.env.PUBLIC_URL })
 
 const initialState = {}
 const enhancers = []

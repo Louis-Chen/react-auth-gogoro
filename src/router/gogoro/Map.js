@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useLayoutEffect }  from 'react'
+
+import { isEmpty } from 'lodash'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -9,11 +11,20 @@ import { Segment } from 'semantic-ui-react'
 
 import { StationList } from 'components/gogoro/List'
 import GogoroStationMap from 'components/gogoro/Map'
-import { isEmpty } from '@firebase/util';
 
 const PageGogoro = props => {
-	const { gogoro, fetchGogoroAPI } = props
-	if (isEmpty(gogoro)) {
+	const { isAuthEmpty, gogoro, fetchGogoroAPI } = props
+
+	const [station, setStation] = useState([])
+	useLayoutEffect(() => {
+		if (isEmpty(gogoro)) {
+			console.log(gogoro)
+			return fetchGogoroAPI()
+		}
+		return setStation(gogoro)
+	}, [gogoro])
+
+	if (isAuthEmpty) {
 		return <Redirect to="/" />
 	} else {
 		return (
@@ -21,12 +32,12 @@ const PageGogoro = props => {
 				<Row>
 					<Col xs={10} sm={6} md={4} lg={3}>
 						<Segment>
-							<StationList gogoro={gogoro} fetchGogoroAPI={fetchGogoroAPI} />
+							<StationList station={station} />
 						</Segment>
 					</Col>
 					<Col xs={2} sm={6} md={8} lg={9}>
 						<Segment>
-							<GogoroStationMap gogoro={gogoro} />
+							<GogoroStationMap station={station} />
 						</Segment>
 					</Col>
 				</Row>
@@ -41,7 +52,8 @@ PageGogoro.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-	gogoro: state.gogoro
+	gogoro: state.gogoro,
+	isAuthEmpty: state.firebase.auth.isEmpty
 })
 const mapDispatchToProps = dispatch => ({
 	fetchGogoroAPI: () => dispatch(fetchGogoroAPI())

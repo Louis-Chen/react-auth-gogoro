@@ -8,6 +8,7 @@
     "connected-react-router": "^6.3.2",
     "firebase": "^5.9.3",
     "formik": "^1.5.2",
+    "gh-pages": "^2.0.1",
     "google-map-react": "^1.1.4",
     "query-string": "^6.4.2",
     "react": "^16.8.6",

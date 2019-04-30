@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { map, isEmpty } from 'lodash'
+import React, { useState, useLayoutEffect } from 'react'
+import { map } from 'lodash'
 import { Item, Input, Select, Form, Segment } from 'semantic-ui-react'
 import { cities, towns } from './data'
 
@@ -9,17 +9,13 @@ const cityOptions = map(cities, city => ({
 	value: city
 }))
 const StationList = props => {
-	const { gogoro, fetchGogoroAPI } = props
-	const [station, setStation] = useState([])
+	const { station } = props
 	const [search, setSearch] = useState('')
 	const [city, setCity] = useState('')
 	const [townOptions, setTownOption] = useState([])
 	const [town, setTown] = useState('')
 
-	useEffect(() => {
-		if (isEmpty(gogoro)) {
-			return fetchGogoroAPI()
-		}
+	useLayoutEffect(() => {
 		if (city) {
 			let options = []
 			map(towns, (town, i) => {
@@ -35,8 +31,7 @@ const StationList = props => {
 			})
 			return setTownOption(options)
 		}
-		return setStation(gogoro)
-	}, [gogoro, city])
+	}, [city])
 
 	const filterList = () => {
 		let updatedList = station.filter(item => {
@@ -60,7 +55,6 @@ const StationList = props => {
 		})
 		return data
 	}
-
 	return (
 		<React.Fragment>
 			<Form>
@@ -98,6 +92,8 @@ const StationList = props => {
 			{/* <pre>{JSON.stringify(station, null, )}</pre> */}
 		</React.Fragment>
 	)
+
+
 }
 
 export { StationList }

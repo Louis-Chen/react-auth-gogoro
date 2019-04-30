@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-auth-gogoro/precache-manifest.25652a7dac566c54bb91c10c9d991209.js"
+  "/react-auth-gogoro/precache-manifest.16fa8215aa1f645d8061aa11820df393.js"
 );
 
 workbox.clientsClaim();

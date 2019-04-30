@@ -1,6 +1,5 @@
 import React from 'react'
-
-// import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'semantic-ui-css/semantic.min.css'
 
@@ -10,6 +9,7 @@ import Nav from 'components/layout/Nav'
 const App = () => (
 	<React.Fragment>
 		<Nav />
+		<ToastContainer />
 		<RouterPage />
 	</React.Fragment>
 )

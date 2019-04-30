@@ -2,16 +2,19 @@ import React from 'react'
 import { Switch, Route } from 'react-router'
 
 import RouterAuth from './auth'
-import RouterUser from './user'
+import PageUserProfile from 'router/user/Profile'
 
 import PageSignIn from 'router/sign/Login'
+
+import PageGogoro from 'router/gogoro/Map'
 
 const RouterPages = () => {
 	return (
 		<Switch>
 			<Route exact path="/" component={PageSignIn} />
-			<Route component={RouterAuth} />
-			<Route component={RouterUser} />
+			<Route path="/user/profile" component={PageUserProfile} />
+			<Route path="/auth" component={RouterAuth} />
+			<Route path="/gogoro" component={PageGogoro} />
 		</Switch>
 	)
 }
